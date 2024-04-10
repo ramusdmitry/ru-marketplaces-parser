@@ -1,8 +1,8 @@
 import os
 import asyncio
 import logging
-from dotenv import load_dotenv
 
+from dotenv import load_dotenv
 from aiogram import Bot, Dispatcher, F
 from app.handlers import router
 
