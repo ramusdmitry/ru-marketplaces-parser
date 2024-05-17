@@ -7,9 +7,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from parser.constants import TAGS
-from storage import db
-from storage.crud import add_or_update_product
 
 logging.basicConfig(level=logging.INFO)
 
@@ -123,9 +120,18 @@ if __name__ == '__main__':
 
     # yandex = OzonBaseParser('yandex', TAGS)
 
-    url = 'https://megamarket.ru/catalog/details/posudomoechnaya-mashina-kuppersberg-gsm-6074-600005006810/'
-
+    # url = 'https://megamarket.ru/catalog/details/posudomoechnaya-mashina-kuppersberg-gsm-6074-600005006810/'
+    url = 'https://www.wildberries.ru/catalog/13489202/detail.aspx'
     driver.get(url)
+
+    """
+    WB:
+    
+    //span[@class='price-block__wallet-price'] (price-block__wallet-price = special price) with WB wallet
+    driver.find_element(By.XPATH, "//ins[@class='price-block__final-price wallet']").text  without WB wallet (discount)
+    driver.find_element(By.XPATH, "//del[@class='price-block__old-price']").text // original
+    
+    """
 
     price = driver.find_element(By.XPATH, "//span[contains(@class, 'sales-block-offer-price__price-final')]")
     old_price = driver.find_element(By.XPATH, "//del[contains(@class, 'crossed-old-price-with-discount__crossed-old-price')]").text # может и не быть

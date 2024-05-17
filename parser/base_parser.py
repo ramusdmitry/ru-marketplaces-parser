@@ -37,6 +37,7 @@ class BaseParser:
         if name.upper() in ("YANDEX", "OZON"):
             self.tags = tags[name.upper()]
 
+    # на тест! https://market.yandex.ru/product--blesk-dlia-gub-le-grand-volume/664040634?sku=100928907750&uniqueId=924574&do-waremd5=TkWAAtMswRA95y8XyphX9g
     def get_product_price(self, driver: WebDriver) -> dict:
         ### Наверное стоит заменить на special_price, так как ozon_price, yandex_price это не оч
         result = {
