@@ -3,12 +3,14 @@ from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 import logging
 
+from storage import db
+from storage.db import session
 from .models import User, Product, ProductPrice, UserProduct
 
 
 # Функция для добавления или обновления продукта
 def add_or_update_product(session: Session, user_id: int, username: str, product_name: str, url: str,
-                          yandex_price: float, discount_price: float, original_price: float):
+                          special_price: float, discount_price: float, original_price: float):
     try:
         # Поиск пользователя
         user = session.query(User).filter(User.user_id == user_id).first()
@@ -40,7 +42,7 @@ def add_or_update_product(session: Session, user_id: int, username: str, product
         # Добавление новой цены продукта
         new_price = ProductPrice(
             product_id=product.id,
-            yandex_price=yandex_price,
+            special_price=special_price,
             discount_price=discount_price,
             original_price=original_price,
             checked_at=datetime.now()
@@ -110,4 +112,20 @@ def get_product(session: Session, product_id: int):
         return product_info
     except SQLAlchemyError as e:
         logging.error(f"An error occurred while retrieving the product: {e}")
+        return None
+
+
+def get_products(session: Session):
+    try:
+        return session.query(Product).all()
+    except SQLAlchemyError as e:
+        logging.error(f"An error occurred while retrieving the products: {e}")
+        return None
+
+def get_urls(session: Session):
+    try:
+        products = session.query(Product).all()
+        return [p.url for p in products]
+    except SQLAlchemyError as e:
+        logging.error(f"An error occurred while retrieving the products urls: {e}")
         return None

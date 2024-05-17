@@ -2,6 +2,4 @@
 .idea/
 **/__pycache__/
 
-/alembic/versions/*_tmp.py
-/alembic/versions/*_local.py
 

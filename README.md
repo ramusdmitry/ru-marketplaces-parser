@@ -40,3 +40,9 @@ target_metadata = Base.metadata
 ```shell
 alembic upgrade head
 ```
+
+
+# TODO:
+
+1. В products_prices цены почему-то каждый раз записываются, а не обновляются
+2. Создаем N воркеров и держат N драйвер
