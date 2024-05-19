@@ -1,25 +1,17 @@
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from time import sleep
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-
-import parser.constants
-from parser.base_parser import BaseParser
+from parser.yandex import YandexParser
+from parser.wb import WBParser
 from storage import crud, db
 
 # Настройки логирования
 logging.basicConfig(level=logging.INFO)
 
-
 # Функция для многопоточного парсинга
 def multi_threaded_parsing(urls, max_workers=5):
     results = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        yandex = BaseParser("YANDEX", parser.constants.TAGS)
-        future_to_url = {executor.submit(yandex.get_product_info, url): url for url in urls}
+        future_to_url = {executor.submit(parse_url, url): url for url in urls}
         for future in as_completed(future_to_url):
             url = future_to_url[future]
             try:
@@ -30,17 +22,32 @@ def multi_threaded_parsing(urls, max_workers=5):
                 logging.error(f"Error occurred for URL {url}: {e}")
     return results
 
+# Функция для парсинга одного URL
+def parse_url(url):
+    if not url.strip():
+        logging.error(f"Empty URL provided: {url}")
+        return {"error": "Empty URL provided"}
+
+    parser = None
+    if 'yandex' in url:
+        parser = YandexParser(url)
+    elif 'wildberries' in url:
+        parser = WBParser(url)
+    else:
+        logging.error(f"Unsupported URL provided: {url}")
+        return {"error": "Unsupported URL provided"}
+
+    try:
+        return parser.get_product_info()
+    except Exception as e:
+        logging.error(f"Error occurred while parsing URL {url}: {e}")
+        return {"error": str(e)}
+
 # Пример использования
 if __name__ == "__main__":
     current_session = db.session
     urls = crud.get_urls(current_session)
-    # urls = [
-    #     "https://example.com/product1",
-    #     "https://example.com/product2",
-    #     "https://example.com/product3",
-    #     # Добавьте больше URL-адресов для тестирования
-    # ]
-    #
+
     parsed_data = multi_threaded_parsing(urls, max_workers=5)
     for data in parsed_data:
         print(data)

@@ -10,6 +10,7 @@ from constants import TAGS
 from storage import db
 from storage.crud import add_or_update_product
 
+### самая первая версия, это уже не имеет смысла, весь код запускается в worker.py
 
 def extract_prices(text):
     # Регулярное выражение для поиска цен

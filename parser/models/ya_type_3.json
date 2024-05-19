@@ -1,0 +1,303 @@
+{
+  "location": "DEFAULT_OFFER",
+  "skuId": "100548401803",
+  "marketSkuCreator": "market",
+  "price": 247,
+  "oldPrice": 247,
+  "merchPrice": 507,
+  "vendorId": 8508864,
+  "hid": 8480752,
+  "nid": 18071735,
+  "isDigital": false,
+  "deliveryPartnerTypes": [
+    "YANDEX_MARKET"
+  ],
+  "offerColor": "blue",
+  "productId": 334398110,
+  "wareId": "kiJ1Pu8IvxjfEM0gU05xwg",
+  "feedId": 475690,
+  "availableCount": 24,
+  "shopId": 431782,
+  "supplierId": 1167560,
+  "shop_sku": "206804",
+  "isEda": false,
+  "isExpress": false,
+  "deliveryOptions": [
+    {
+      "partnerType": "market_delivery",
+      "dayFrom": 1,
+      "dayTo": 1,
+      "price": 249
+    }
+  ],
+  "warehouseId": 172,
+  "isAnyExpress": false,
+  "isBnpl": true,
+  "isInstallments": false,
+  "businessId": "1167561",
+  "isFoodtech": false,
+  "allDeliveryOptions": [
+    {
+      "price": 249,
+      "partnerType": "market_delivery",
+      "dayFrom": 1,
+      "dayTo": 1,
+      "type": "DELIVERY"
+    }
+  ],
+  "paymentTypes": [
+    "PREPAYMENT"
+  ],
+  "isOnDemand": false,
+  "benefit": {
+    "type": "waremd5",
+    "isPrimary": true,
+    "description": "Хорошая цена от надёжного магазина"
+  },
+  "yandexBnplInfo": {
+    "enabled": true
+  },
+  "isBondAvailable": false,
+  "yaBankPrice": {
+    "price": {
+      "value": 229,
+      "currency": "RUR"
+    },
+    "type": "ya-card"
+  },
+  "isDSBS": false,
+  "promos": [
+    {
+      "key": "A2EoxWkBn9UGJi1MBGFoig",
+      "type": "direct-discount",
+      "shopPromoId": "cf_117560",
+      "value": 6,
+      "landingUrl": "https://market.yandex.ru/special/direct-discount-landing?shopPromoId=cf_117560",
+      "isPersonal": false,
+      "description": "Все хиты мая: 7 категорий, первая волна"
+    },
+    {
+      "key": "fZ3XLaWtLFCVyd6AGdo2aA",
+      "type": "discount-by-payment-type",
+      "shopPromoId": "fZ3XLaWtLFCVyd6AGdo2aA",
+      "landingUrl": "https://market.yandex.ru/special/discount-by-payment-type-landing?shopPromoId=fZ3XLaWtLFCVyd6AGdo2aA",
+      "isPersonal": false,
+      "description": "Зеленые цены. Базовая. На все"
+    },
+    {
+      "key": "4h99QNH9YmkWBbpSsnVb-g",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_117848",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_117848",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "6W717p4B0PqU-FgzelKj-w",
+      "type": "empty-promo",
+      "shopPromoId": "L20607901",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=L20607901",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "AkwS2Odq4BqKiXJcQ7YnXA",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_113135",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_113135",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "CxbNma60xcgHiZccgwq7OA",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_117890",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_117890",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "HUFJoTGiKd4ZpZVq3oScAg",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_113130",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_113130",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "KxR9sjU7AtX5-GOqofvolg",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_142157",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_142157",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "OHkKejSRcNXwjPS7uWcLNQ",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_136582",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_136582",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "dfmz0YHb1hS1EZPd874_wA",
+      "type": "empty-promo",
+      "shopPromoId": "L20572885",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=L20572885",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "himZaMKDMUJGJ43Ij2zYZQ",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_119761",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_119761",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "iorCIpYjZHuUaJ7h_kSS9w",
+      "type": "empty-promo",
+      "shopPromoId": "aff_parent_121147",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=aff_parent_121147",
+      "isPersonal": false,
+      "description": "No description provided"
+    },
+    {
+      "key": "z0q09Hc2YI_F30hocYABmA",
+      "type": "empty-promo",
+      "shopPromoId": "L20604361",
+      "landingUrl": "https://market.yandex.ru/special/empty-promo-landing?shopPromoId=L20604361",
+      "isPersonal": false,
+      "description": "No description provided"
+    }
+  ],
+  "priceDetails": {
+    "price": {
+      "value": 231,
+      "currency": "RUR"
+    },
+    "priceWithoutVat": {
+      "value": 193,
+      "currency": "RUR"
+    },
+    "greenPrice": {
+      "price": {
+        "value": 229,
+        "currency": "RUR"
+      },
+      "type": "ya-card"
+    },
+    "discountedPrice": {
+      "price": {
+        "value": 231,
+        "currency": "RUR"
+      },
+      "discount": {
+        "value": 16,
+        "currency": "RUR"
+      },
+      "percent": 6
+    }
+  },
+  "type": "offer",
+  "snippet_type": "product",
+  "showUid": "17161197794538053458406001",
+  "promo_attributes": [
+    {
+      "shopPromoId": "cf_117560",
+      "promoType": "direct-discount",
+      "promoKey": "A2EoxWkBn9UGJi1MBGFoig",
+      "parentPromoId": "cf_sp_117126"
+    },
+    {
+      "shopPromoId": "fZ3XLaWtLFCVyd6AGdo2aA",
+      "promoType": "discount-by-payment-type",
+      "promoKey": "fZ3XLaWtLFCVyd6AGdo2aA",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_117848",
+      "promoType": "empty-promo",
+      "promoKey": "4h99QNH9YmkWBbpSsnVb-g",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "L20607901",
+      "promoType": "empty-promo",
+      "promoKey": "6W717p4B0PqU-FgzelKj-w",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_113135",
+      "promoType": "empty-promo",
+      "promoKey": "AkwS2Odq4BqKiXJcQ7YnXA",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_117890",
+      "promoType": "empty-promo",
+      "promoKey": "CxbNma60xcgHiZccgwq7OA",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_113130",
+      "promoType": "empty-promo",
+      "promoKey": "HUFJoTGiKd4ZpZVq3oScAg",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_142157",
+      "promoType": "empty-promo",
+      "promoKey": "KxR9sjU7AtX5-GOqofvolg",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_136582",
+      "promoType": "empty-promo",
+      "promoKey": "OHkKejSRcNXwjPS7uWcLNQ",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "L20572885",
+      "promoType": "empty-promo",
+      "promoKey": "dfmz0YHb1hS1EZPd874_wA",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_119761",
+      "promoType": "empty-promo",
+      "promoKey": "himZaMKDMUJGJ43Ij2zYZQ",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "aff_parent_121147",
+      "promoType": "empty-promo",
+      "promoKey": "iorCIpYjZHuUaJ7h_kSS9w",
+      "parentPromoId": ""
+    },
+    {
+      "shopPromoId": "L20604361",
+      "promoType": "empty-promo",
+      "promoKey": "z0q09Hc2YI_F30hocYABmA",
+      "parentPromoId": ""
+    }
+  ],
+  "modelId": 334398110,
+  "marketSku": "100548401803",
+  "additionalPrices": [
+    {
+      "priceType": "yaBank",
+      "priceValue": 229
+    },
+    {
+      "priceType": "withDiscount",
+      "priceValue": 231
+    }
+  ],
+  "paymentMethodTypes": [
+    "prepaymentcard"
+  ],
+  "isCrossBorder": "false"
+}

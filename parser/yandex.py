@@ -1,18 +1,19 @@
-from dataclasses import dataclass, asdict
+from dataclasses import asdict
 
 from selenium.webdriver.remote.webelement import WebElement
 
-from base_parser import BaseParser
-from constants import TAGS
+from parser.base_parser import BaseParser
 from json import loads
 
-from models.yandex_structures import PriceDetails
+from parser.models.yandex_structures import PriceDetails
+from storage import db
+from storage.crud import add_or_update_product
 
 
-class YaParser(BaseParser):
+class YandexParser(BaseParser):
 
     def __init__(self, url):
-        super(YaParser, self).__init__(name='yandex', url=url)
+        super(YandexParser, self).__init__(name='yandex', url=url)
 
     def get_product_description(self):
         tags = self.tags["product_card"]
@@ -163,7 +164,7 @@ class YaParser(BaseParser):
 
 
 if __name__ == '__main__':
-
+    # for local test
     urls = [
         "https://market.yandex.ru/product--solntsezashchitnye-ochki/1816465355?sku=101940647168&offerid=cxKFcC98w5RHxHe-DxDX9g&cpc=tg4KkW-wFZdbEls34SuNCQ-6OIp0cM461bvGrz7lr2JtymjW4YhECsT6nBEt8x4XwW5vD3azc-AKv7coES-aGx4Ld_K4VoGruuY3nIiocEiUV4EpH9eeGCCL5gmfzYEoBoqlN8IPtMl8uAX6JQzkRoOnM0WD-J2z_23d3I8_4Ikn0BDEvLXw8P3hpIAd-oYOCJxZOkcikV7TQQf591D9m8NKTK5mJphmc44ocETQ34DqVolfzGYM8x68ClS9lbcFjoDbrH9OU1XuaJ9zF9A5khS60Uiy42pxct1QYE7uK_E,&show-uid=17161242506704178846006011&uniqueId=6265044&lr=216&",
         "https://market.yandex.ru/product--gel-tint-dlia-gub-kiss-me-again/334398110?sku=100548401803&uniqueId=1167561&do-waremd5=kiJ1Pu8IvxjfEM0gU05xwg&sponsored=1&cpc=kAr-AWBSXoMvRGS3YqxhbZh7HkMSdPFBcelca61JO706XuUIqX_HiYiP6u-PJTH6RNkXeLPpNYQZdja6t52y2prGniwDbp3Ee3wPGZaCXeKiQWOvDNWXu2Viit_1psriXDBw7-DQ5nbNOliagmUoQtp6nnnedHJs3Y6EF9HXoNvKJaue9pbiB9JV0L5nRjSQVlh5fLJMMRGzVn1ulrVYfoNZGXy6_NZvR24xyd8hmFXSGRb8IopC9nJ33SQdXKEmHD9Xq9-jfvW0xR-E5Jb4eOl7dVnjfB5mP54G9NMk_ZY%2C",
@@ -172,6 +173,8 @@ if __name__ == '__main__':
     ]
 
     for u in urls:
-        yandex_parser = YaParser(u)
+        yandex_parser = YandexParser(u)
         r = yandex_parser.get_product_info()
+        add_or_update_product(session=db.session, **r, user_id=123, username="dimko")
+
         print(r)

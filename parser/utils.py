@@ -1,31 +1,23 @@
-import re
+import logging
 
-TAGS = {
-    "YANDEX": {
-        "prices": {
-            "current": "snippet-price-current",
-            "old": "snippet-price-old"
-        },
-        "product_card": {
-            "title": "productCardTitle"
-        }
-    }
-}
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 
-def extract_prices(text):
-    # Регулярное выражение для поиска цен
-    # Пример: 'без: Вместо: 359₽499₽'
-    pattern = re.compile(r'(\d[\d\s]*\d)')  # Захватывает числа, разделенные пробелами
+def get_driver(url: str = "", app_mode: str = "debug"):
+    options = Options()
+    if app_mode == "debug":
+        options.add_argument("--start-maximized")
+    else:
+        options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+    if url:
+        driver.get(url)
+    return driver
 
-    # Найти все совпадения
-    matches = pattern.findall(text)
 
-    prices = [int(match.replace(' ', '').replace('\u2009', '')) for match in matches]
-    return prices
-
-
-def is_captcha_displayed(driver):
-    if "captcha" in driver.current_url:
+def is_captcha_displayed(url: str):
+    logging.debug(f"Найдена капча у {url}. Закрываю процесс")
+    if "captcha" in url:
         return True
     return False
