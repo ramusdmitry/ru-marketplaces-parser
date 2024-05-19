@@ -32,3 +32,20 @@
 - Скидка: ``<div data-auto="discount-badge" class="_1ixhg _3PeLm">–6&thinsp;%</div>``
 - Цена 2: ``<span class="_2r9lI" data-auto="snippet-price-old"><span aria-hidden="true">без:<!-- -->&nbsp;</span><span class="_3gYEe">Вместо: </span>305<!-- -->&thinsp;<span class="_39uKu">₽</span><s class="_347Sb">322</s>&thinsp;<span class="_39uKu">₽</span></span>``
 - Цена 3: ``<span class="_2r9lI" data-auto="snippet-price-old"><span aria-hidden="true">без:<!-- -->&nbsp;</span><span class="_3gYEe">Вместо: </span>305<!-- -->&thinsp;<span class="_39uKu">₽</span><s class="_347Sb">322</s>&thinsp;<span class="_39uKu">₽</span></span>``
+
+## WB
+
+1. Тип 1 ([Ссылка](https://www.wildberries.ru/catalog/64775386/detail.aspx))
+
+![](screenshots/wb_type1.png)
+
+- Цена 1: ``//ins[@class="price-block__final-price"]``
+- Цена 2: ``//del[@class="price-block__old-price"]``
+
+2. Тип 2 ([Ссылка]())
+
+![](screenshots/wb_type2.png)
+
+- Цена 1: ``//span[@class="price-block__wallet-price"]``
+- Цена 2: ``//ins[@class="price-block__final-price wallet"]``
+- Цена 3: ``//del[@class="price-block__old-price"]``
