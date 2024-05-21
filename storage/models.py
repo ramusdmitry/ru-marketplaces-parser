@@ -52,7 +52,7 @@ class UserProduct(Base):
     product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.now)
 
-DATABASE_URL = 'mysql+mysqlconnector://prices_user:password@localhost/prices_db'
+DATABASE_URL = 'mysql+mysqlconnector://root:my-secret-pw@localhost/prices_db'
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
 

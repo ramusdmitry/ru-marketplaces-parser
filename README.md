@@ -1,41 +1,39 @@
-# О сервисе
-
-## Настройка
-
+# Создание виртуального окружения и установка зависимостей
 ```shell
-python3 -m venv .venv/
+python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Запуск
 
-### Запускаем MySQL в docker
-
-```shell
-docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=prices_db -p 3306:3306 -d mysql:8.3
+# Запуск MySQL в Docker
+```sh
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=prices_db -p 3306:3306 -d mysql:8.0
 ```
 
-### Применяем миграции
-
+# Инициализация Alembic
 ```shell
 alembic init alembic
 ```
 
-Затем меняем в файле alembic.ini
-```text
-[alembic]
+
+# Измените alembic.ini, чтобы указать строку подключения
+```shell
 sqlalchemy.url = mysql+mysqlconnector://root:my-secret-pw@localhost/prices_db
 ```
 
-Добавляем в alembic/env.py
-```python
-from storage.models import Base
+# Настройка alembic/env.py
+```shell
+from your_project.models import Base
 target_metadata = Base.metadata
 ```
 
-Применяем миграцию
+# Создание первой миграции
+```shell
+alembic revision --autogenerate -m "Initial migration"
+```
 
+# Применение миграции
 ```shell
 alembic upgrade head
 ```
