@@ -5,7 +5,7 @@
 ```shell
 python3 -m venv .venv/
 source .venv/bin/activate
-pip install -r requirmenets.txt
+pip install -r requirements.txt
 ```
 
 ## Запуск
@@ -13,7 +13,7 @@ pip install -r requirmenets.txt
 ### Запускаем MySQL в docker
 
 ```shell
-docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=prices_db -p 3306:3306 -d mysql:latest
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=prices_db -p 3306:3306 -d mysql:8.3
 ```
 
 ### Применяем миграции
@@ -25,7 +25,7 @@ alembic init alembic
 Затем меняем в файле alembic.ini
 ```text
 [alembic]
-sqlalchemy.url = mysql+mysqlconnector://prices_user:password@localhost/prices_db
+sqlalchemy.url = mysql+mysqlconnector://root:my-secret-pw@localhost/prices_db
 ```
 
 Добавляем в alembic/env.py
