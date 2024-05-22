@@ -1,41 +1,52 @@
-# О сервисе
-
-## Настройка
-
+# Создание виртуального окружения и установка зависимостей
 ```shell
-python3 -m venv .venv/
+python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requiremenets.txt
+pip install -r requirements.txt
 ```
 
-## Запуск
 
-### Запускаем MySQL в docker
-
+# Запуск MySQL в Docker
 ```shell
-docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=prices_db -p 3306:3306 -d mysql:latest
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=prices_db -p 3306:3306 -d mysql:8.0
 ```
 
-### Применяем миграции
-
+# Инициализация Alembic
 ```shell
 alembic init alembic
 ```
 
-Затем меняем в файле alembic.ini
-```text
-[alembic]
-sqlalchemy.url = mysql+mysqlconnector://prices_user:password@localhost/prices_db
+
+# Измените alembic.ini, чтобы указать строку подключения
+```shell
+sqlalchemy.url = mysql+mysqlconnector://root:my-secret-pw@localhost/prices_db
 ```
 
-Добавляем в alembic/env.py
-```python
-from storage.models import Base
+# Настройка alembic/env.py
+```shell
+from your_project.models import Base
 target_metadata = Base.metadata
 ```
 
-Применяем миграцию
+# Создание первой миграции
+```shell
+alembic revision --autogenerate -m "Initial migration"
+```
 
+# Применение миграции
 ```shell
 alembic upgrade head
+```
+
+# Создайте файл `.env` в ru-marketplaces-parser
+
+
+# Пропишите в файле `.env` токен вашего бота
+```shell
+TELEGRAM_BOT_TOKEN = "your-bot-token"
+```
+
+# Запуск бота
+```shell
+payton run.py
 ```

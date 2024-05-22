@@ -61,13 +61,32 @@ async def url_two(message: Message, state: FSMContext):
     await state.update_data(url=message.text)
     await state.set_state(GetUrl.answer)
     url_data = await state.get_data()
-    await message.answer(f'Я приступил к поиску товара:\n{url_data["url"]},\nЭто займет какое-то время')
+    await message.answer(f'Я приступил к поиску товара:\n{url_data["url"]}\nЭто займет какое-то время')
 
     #search_url = await google_search(url_data["url"])
     #await message.answer(search_url)
 
-    search_url = await parse_url(url_data["url"])
-    await message.answer(parser.get_product_info())
+
+    result = await parse_url(url_data["url"])
+    if isinstance(result, dict):
+        # Создаем словарь для перевода
+        translation_dict = {
+            "title": "Название",
+            "description": "Описание",
+            "url": "Ссылка",
+            "original_price": "Оригинальная цена",
+            "discount_price": "Цена со скидкой",
+            "special_price": "Специальная цена",
+            "discount_percent": "Процент скидки"
+        }
+        # Переводим ключи на русский
+        result_translated = {translation_dict.get(k, k): v for k, v in result.items()}
+        # Преобразуем словарь в красивую строку
+        result_str = '\n'.join(f'{k}: {v}' for k, v in result_translated.items())
+        await message.answer(result_str)
+    else:
+        await message.answer(result)
+
 
     await message.answer(
         'Я готов искать следующий товар для тебя!\n'

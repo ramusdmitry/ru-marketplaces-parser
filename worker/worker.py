@@ -4,11 +4,12 @@ from parser.yandex import YandexParser
 from parser.wb import WBParser
 from storage import crud, db
 
+
 # Настройки логирования
 logging.basicConfig(level=logging.INFO)
 
 # Функция для многопоточного парсинга
-def multi_threaded_parsing(urls, max_workers=5):
+async def multi_threaded_parsing(urls, max_workers=5):
     results = []
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_url = {executor.submit(parse_url, url): url for url in urls}
@@ -23,7 +24,7 @@ def multi_threaded_parsing(urls, max_workers=5):
     return results
 
 # Функция для парсинга одного URL
-def parse_url(url):
+async def parse_url(url):
     if not url.strip():
         logging.error(f"Empty URL provided: {url}")
         return {"error": "Empty URL provided"}
@@ -35,7 +36,7 @@ def parse_url(url):
         parser = WBParser(url)
     else:
         logging.error(f"Unsupported URL provided: {url}")
-        return {"error": "Unsupported URL provided"}
+        return {"error": "Ссылка не поддерживается"}
 
     try:
         return parser.get_product_info()
@@ -51,3 +52,6 @@ if __name__ == "__main__":
     parsed_data = multi_threaded_parsing(urls, max_workers=5)
     for data in parsed_data:
         print(data)
+
+#result = parse_url('https://ozon.ru/t/AZBbw8w')
+#print(result)
