@@ -1,0 +1,9 @@
+.venv/
+.idea/
+**/__pycache__/
+parser/models/*.json
+.DS_Store
+alembic.ini
+.env
+alembic
+
