@@ -7,6 +7,7 @@ from selenium.common import NoSuchElementException, WebDriverException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
+from parser import utils
 from parser.constants import TAGS
 from parser.utils import get_driver, is_captcha_displayed
 from storage import db
@@ -19,7 +20,7 @@ class BaseParser:
 
     def __init__(self, name: str, tags: dict = TAGS, url: str = ""):
         self.name = name
-        assert name.upper() in ("YANDEX", "OZON", "WB", "MEGAMARKET")
+        assert name.upper() in ("YANDEX", "WB")
         self.tags = tags[name.upper()]
         self.url = url
         self.driver = get_driver(url)
@@ -29,6 +30,7 @@ class BaseParser:
             "title": "",
             "description": "",
             "url": "",
+            "image_url": "",
             "original_price": -1,
             "discount_price": -1,
             "special_price": -1,
@@ -44,6 +46,7 @@ class BaseParser:
                 "title": self.get_product_title() if hasattr(self, 'get_product_title') else "",
                 "description": self.get_product_description() if hasattr(self, 'get_product_description') else "",
                 "url": self.url,
+                "image_url": self.get_product_image_url() if hasattr(self, 'get_product_image_url') else "",
                 "original_price": self.get_product_original_price() if hasattr(self,
                                                                                'get_product_original_price') else -1,
                 "discount_price": self.get_product_discount_price() if hasattr(self,
@@ -79,6 +82,9 @@ class BaseParser:
     def get_product_prices(self):
         pass
 
+    def get_product_image_url(self):
+        pass
+
     def get_elements(self, xpath: str, base_xpath: str = ""):
         if self.driver is None:
             raise WebDriverException("Driver is not initialized")
@@ -94,7 +100,9 @@ class BaseParser:
             logging.error(f"{__name__}: An error occurred while fetching the element (xpath = {xpath}): {e}")
             return ""
 
-    def get_element(self, xpath: str, base_xpath: str = "", delay: float = 0.0):
+    def get_element(self, xpath: str, base_xpath: str = "", by=By.XPATH, delay: float = 0.0):
+        if self.name == 'WB':
+            delay = utils.random_delay()
         if self.driver is None:
             raise WebDriverException("Driver is not initialized")
         if xpath == "":
@@ -102,7 +110,7 @@ class BaseParser:
         try:
             if delay > 0:
                 time.sleep(delay)
-            return self.driver.find_element(By.XPATH, f"{base_xpath}{xpath}")
+            return self.driver.find_element(by, f"{base_xpath}{xpath}")
         except NoSuchElementException:
             logging.error(f"{__name__}: Element not found for xpath: {xpath}")
             return ""

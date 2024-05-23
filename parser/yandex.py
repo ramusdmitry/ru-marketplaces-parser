@@ -1,8 +1,10 @@
+import logging
 from dataclasses import asdict
 
 from selenium.webdriver.remote.webelement import WebElement
 
 from parser.base_parser import BaseParser
+from selenium.webdriver.common.by import By
 from json import loads
 
 from parser.models.yandex_structures import PriceDetails
@@ -29,9 +31,21 @@ class YandexParser(BaseParser):
             return elem.text
         return elem
 
+    def get_product_image_url(self):
+        tags = self.tags["product_card"]
+        elem = self.get_element(tags["image_url"])
+        if isinstance(elem, WebElement):
+            try:
+                child_elem = elem.find_element(by=By.TAG_NAME, value='img')
+                if isinstance(child_elem, WebElement):
+                    return child_elem.get_attribute('src')
+            except Exception as e:
+                logging.warning(f"An error occurred while fetching the image: {e}")
+        return elem
+
     def get_price_details(self, data: dict):
         """
-
+        Совмещает результаты парсинга из разных методов в один общий
         :param data:
         :return:
         """
@@ -160,7 +174,6 @@ class YandexParser(BaseParser):
         if not discounted_price:
             return -1
         return discounted_price.get('percent', -1)
-
 
 
 if __name__ == '__main__':

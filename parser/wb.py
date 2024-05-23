@@ -33,6 +33,15 @@ class WBParser(BaseParser):
     def get_product_discount_percentage(self):
         return self.get_prices().get('discount_percent')
 
+    def get_product_image_url(self):
+        image_url = ''
+        try:
+            elem = self.get_element(self.tags['product_card']['image_url'])
+            return elem.get_attribute('src')
+        except Exception as e:
+            logging.error(f"An error occurred while extracting image: {e}")
+        return image_url
+
     def get_prices(self) -> (str, str):
         tags = self.tags['product_card']['prices']['type_2']
         prices = {

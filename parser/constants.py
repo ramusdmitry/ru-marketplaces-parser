@@ -20,6 +20,7 @@ TAGS = {
                 "discount_percent": '//div[@data-auto="discount-badge"]',
                 "price_subscribe": '//div[@data-zone-name="price-subscribe"]'
             },
+            "image_url": '//div[@data-auto="image-gallery-nav-item"]',
         },
         "offer_card": "//div[@data-zone-name='cpa-offer']",
     },
@@ -41,6 +42,7 @@ TAGS = {
                 },
 
             },
+            "image_url": "//img[@data-link=\"{on 'load' ~onImgLoad}\"]"
         }
 
     },
