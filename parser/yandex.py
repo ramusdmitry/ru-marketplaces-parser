@@ -188,6 +188,6 @@ if __name__ == '__main__':
     for u in urls:
         yandex_parser = YandexParser(u)
         r = yandex_parser.get_product_info()
-        add_or_update_product(session=db.session, **r, user_id=123, username="dimko")
+        add_or_update_product(session=db.session, **r, user_id=123)
 
         print(r)

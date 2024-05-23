@@ -156,7 +156,7 @@ if __name__ == '__main__':
     # driver.get(url)
     product_info = yandex.get_product_info()
 
-    add_or_update_product(session=db.session, **product_info, user_id=123, username="dimko")
+    add_or_update_product(session=db.session, **product_info, user_id=123)
 
     if product_info:
         print("Product Name:", product_info['product_name'])

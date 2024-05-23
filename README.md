@@ -51,5 +51,5 @@ TELEGRAM_BOT_TOKEN = "your-bot-token"
 
 ### Запуск бота
 ```shell
-pyton run.py
+python run.py
 ```

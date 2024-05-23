@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from datetime import datetime
 import logging
 
-from .models import User, Product, ProductPrice, UserProduct
+from .models import User, Product, ProductPrice
 
 def delete_product(session: Session, product_id: int):
     try:
@@ -20,7 +20,6 @@ def delete_product(session: Session, product_id: int):
         logging.error(f"An error occurred while deleting the product: {e}")
         raise
 
-
 def get_products(session: Session):
     try:
         return session.query(Product).all()
@@ -28,6 +27,13 @@ def get_products(session: Session):
         logging.error(f"An error occurred while retrieving the products: {e}")
         return None
 
+
+def get_users(session: Session):
+    try:
+        return session.query(User).all()
+    except SQLAlchemyError as e:
+        logging.error(f"An error occurred while retrieving the users: {e}")
+        return None
 
 def get_urls(session: Session):
     try:
@@ -37,29 +43,27 @@ def get_urls(session: Session):
         logging.error(f"An error occurred while retrieving the products urls: {e}")
         return None
 
-def add_or_update_product(session: Session, user_id: int, username: str, title: str, description: str, url: str,
-                          original_price: float, discount_price: float, special_price: float, discount_percent: float):
+def add_or_update_product(session: Session, user_id: int, title: str, description: str, url: str,
+                          original_price: float, discount_price: float, special_price: float, discount_percent: float = 0.0, image_url: str = ''):
     try:
-        # Поиск пользователя
         user = session.query(User).filter(User.user_id == user_id).first()
         if not user:
             logging.info(f"User with id {user_id} not found. Adding new user.")
             user = User(
                 user_id=user_id,
-                username=username,
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow()
             )
             session.add(user)
             session.commit()
 
-        # Поиск продукта
         product = session.query(Product).filter(Product.url == url).first()
         if not product:
             logging.info(f"Product with URL {url} not found. Adding new product.")
             product = Product(
                 product_name=title,
                 url=url,
+                image_url=image_url,
                 user_id=user.user_id,
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow()
@@ -67,12 +71,23 @@ def add_or_update_product(session: Session, user_id: int, username: str, title: 
             session.add(product)
             session.commit()
 
+        # Проверка изменений цен
+        last_price = session.query(ProductPrice).filter(ProductPrice.product_id == product.id).order_by(ProductPrice.checked_at.desc()).first()
+        if last_price:
+            if last_price.original_price != original_price or last_price.discount_price != discount_price or last_price.special_price != special_price:
+                notify_user = True
+            else:
+                notify_user = False
+        else:
+            notify_user = True
+
         # Добавление новой цены продукта
         new_price = ProductPrice(
             product_id=product.id,
             title=title,
             description=description,
             url=url,
+            image_url=image_url,
             original_price=original_price,
             discount_price=discount_price,
             special_price=special_price,
@@ -80,26 +95,14 @@ def add_or_update_product(session: Session, user_id: int, username: str, title: 
             checked_at=datetime.utcnow()
         )
         session.add(new_price)
-
-        # Проверка связи пользователя с продуктом
-        user_product = session.query(UserProduct).filter(UserProduct.user_id == user_id,
-                                                         UserProduct.product_id == product.id).first()
-        if not user_product:
-            user_product = UserProduct(
-                user_id=user.user_id,
-                product_id=product.id,
-                created_at=datetime.utcnow()
-            )
-            session.add(user_product)
-
         session.commit()
+
+        return notify_user
     except SQLAlchemyError as e:
         session.rollback()
         logging.error(f"An error occurred while adding or updating the product: {e}")
         raise
 
-
-# Функция для получения информации о продукте
 def get_product(session: Session, product_id: int):
     try:
         product = session.query(Product).filter(Product.id == product_id).first()

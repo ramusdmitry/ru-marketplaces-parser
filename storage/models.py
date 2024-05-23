@@ -10,7 +10,6 @@ class User(Base):
     __tablename__ = 'users'
 
     user_id = Column(Integer, primary_key=True)
-    username = Column(Text, nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
     updated_at = Column(TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
     products = relationship("Product", back_populates="user")
@@ -22,6 +21,7 @@ class Product(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     product_name = Column(Text, nullable=False)
     url = Column(Text, nullable=False)
+    image_url = Column(Text, nullable=True)
     user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
     created_at = Column(TIMESTAMP, default=datetime.utcnow)
     updated_at = Column(TIMESTAMP, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -37,6 +37,7 @@ class ProductPrice(Base):
     title = Column(Text, nullable=True)
     description = Column(Text, nullable=True)
     url = Column(Text, nullable=True)
+    image_url = Column(Text, nullable=True)
     original_price = Column(DECIMAL(10, 2), nullable=True)
     discount_price = Column(DECIMAL(10, 2), nullable=True)
     special_price = Column(DECIMAL(10, 2), nullable=True)
